@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "homepage": "https://shubhank-saxena.github.io/werace",
+  "homepage": "https://shubhank-saxena.github.io/f1-fantasy-game",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
