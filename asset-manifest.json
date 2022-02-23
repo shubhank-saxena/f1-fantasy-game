@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/werace/static/css/main.1497e57e.css",
+    "main.js": "/werace/static/js/main.dd271d66.js",
+    "static/media/ethlogo.png": "/werace/static/media/ethlogo.a85b6de0dc4a013ae2f8.png",
+    "static/media/polygonlogo.png": "/werace/static/media/polygonlogo.6cde40a9b9119621eb2b.png",
+    "index.html": "/werace/index.html",
+    "main.1497e57e.css.map": "/werace/static/css/main.1497e57e.css.map",
+    "main.dd271d66.js.map": "/werace/static/js/main.dd271d66.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1497e57e.css",
+    "static/js/main.dd271d66.js"
+  ]
+}
