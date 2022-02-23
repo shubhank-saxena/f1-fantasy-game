@@ -13,6 +13,8 @@ import Footer from "./components/Footer";
 function App() {
   const [currentAccount, setCurrentAccount] = useState("");
   const [network, setNetwork] = useState("");
+  const [alreadyMinted, setAlreadyMinted] = useState(false);
+  const [mintOver, setMintOver] = useState(false);
 
   // Implement your connectWallet method here
   const connectWallet = async () => {
@@ -61,6 +63,23 @@ function App() {
     const chainId = await ethereum.request({ method: "eth_chainId" });
     setNetwork(networks[chainId]);
 
+    // This is the part, where we check if the user has already minted the contract
+    try{
+      const contract = new ethers.Contract(
+      "0xbc63dc090534d9ca9e4c281e04a125856e1cbd66",
+      contractAbi.abi,
+      currentAccount
+    );
+      await contract.checkMintBalance(currentAccount);
+      if( await contract.getRemaining() === 0){
+        setMintOver(true);
+      }
+    } catch (error) {
+      setAlreadyMinted(true)
+    }
+
+
+
     ethereum.on("chainChanged", handleChainChanged);
 
     // Reload the page when they change networks
@@ -105,8 +124,8 @@ function App() {
       try {
         // Try to switch to the Mumbai testnet
         await window.ethereum.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x13881' }], // Check networks.js for hexadecimal network ids
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: "0x13881" }], // Check networks.js for hexadecimal network ids
         });
       } catch (error) {
         // This error code means that the chain we want has not been added to MetaMask
@@ -114,18 +133,18 @@ function App() {
         if (error.code === 4902) {
           try {
             await window.ethereum.request({
-              method: 'wallet_addEthereumChain',
+              method: "wallet_addEthereumChain",
               params: [
-                {	
-                  chainId: '0x13881',
-                  chainName: 'Polygon Mumbai Testnet',
-                  rpcUrls: ['https://rpc-mumbai.maticvigil.com/'],
+                {
+                  chainId: "0x13881",
+                  chainName: "Polygon Mumbai Testnet",
+                  rpcUrls: ["https://rpc-mumbai.maticvigil.com/"],
                   nativeCurrency: {
-                      name: "Mumbai Matic",
-                      symbol: "MATIC",
-                      decimals: 18
+                    name: "Mumbai Matic",
+                    symbol: "MATIC",
+                    decimals: 18,
                   },
-                  blockExplorerUrls: ["https://mumbai.polygonscan.com/"]
+                  blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
                 },
               ],
             });
@@ -137,18 +156,44 @@ function App() {
       }
     } else {
       // If window.ethereum is not found then MetaMask is not installed
-      alert('MetaMask is not installed. Please install it to use this app: https://metamask.io/download.html');
-    } 
-  }
+      alert(
+        "MetaMask is not installed. Please install it to use this app: https://metamask.io/download.html"
+      );
+    }
+  };
 
   const renderNotConnectedContainer = () => (
-    <button type="button" className="btn btn-primary btn-lg" onClick={connectWallet}>
+    <button
+      type="button"
+      className="btn btn-primary btn-lg"
+      onClick={connectWallet}
+    >
       Connect Wallet
     </button>
   );
 
   const renderMintButton = () => {
-    if (network !== 'Polygon Mumbai Testnet') {
+    if (mintOver===true){
+      return(
+        <button
+          type="button"
+          className="btn btn-primary btn-lg" disabled
+        >
+          Sold Out!
+        </button>
+      );
+    }
+    if (alreadyMinted===true) {
+      return(
+        <button
+          type="button"
+          className="btn btn-primary btn-lg" disabled
+        >
+          You have already minted!
+        </button>
+      );
+    }
+    if (network !== "Polygon Mumbai Testnet") {
       return (
         <button
           type="button"
@@ -204,7 +249,9 @@ function App() {
                         {currentAccount.slice(-4)}{" "}
                       </p>
                     ) : (
-                      <button type="button" className="btn btn-danger">Wallet Not Connected</button>
+                      <button type="button" className="btn btn-danger">
+                        Wallet Not Connected
+                      </button>
                     )}
                   </div>
                 </li>
@@ -241,8 +288,17 @@ function App() {
                 {!currentAccount && renderNotConnectedContainer()}
                 {currentAccount && renderMintButton()}
                 &nbsp;&nbsp;&nbsp;
-                <button type="button" className="btn btn-secondary btn-lg">
-                  How to mint?
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-lg"
+                  onClick={() =>
+                    window.open(
+                      "https://www.youtube.com/watch?v=jPfryC5yCo0",
+                      "_blank"
+                    )
+                  }
+                >
+                  How to mint (for free!)
                 </button>
               </div>
             </div>
