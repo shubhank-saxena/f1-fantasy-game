@@ -18,11 +18,12 @@ contract WeRaceDAONFT is ERC1155, Ownable {
         )
     {
         _mint(msg.sender, tokenID, 1, "");
+        minted++;
         setName('WeRace NFT DAO Token');
     }
 
     function contractURI() public view returns (string memory) {
-        return "ipfs://QmSkN6Fgd725M9vKhBFT6bb96Q47KJ8dERgutTciteGaf1";
+        return "ipfs://QmYY7FMvLcgKgnzJb61q1gvLqpxSoR2N4g2gpkoGfKszQ2";
     }
 
     function setURI(string memory _newuri) public onlyOwner {

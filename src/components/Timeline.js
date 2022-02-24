@@ -25,9 +25,8 @@ const Timeline = () => {
                             <strong>420</strong> ERC115 based WeRace NFT DAO
                             (Decentralized autonomous organization) Launched.
                             The holder of these tokens would govern the way the
-                            platform will work. They would also be recieving
-                            airdrops of WeRace Tokens that would be used to
-                            participate in wagers.
+                            platform will work. They would also be receiving
+                            airdrops of WeRace Tokens to participate in wagers.
                           </p>
                         </div>
                       </div>
@@ -45,10 +44,10 @@ const Timeline = () => {
                           <h3>WeRace Token Launched</h3>
                           <p>
                             WeRace tokens, the tokens native to the WeRace
-                            platform, launched. They will act as the base
-                            currency, being utlizied at various wager formats
-                            across the platform. These tokens can then later be
-                            used to purchase merchandise.
+                            platform, are launched. They will act as the base
+                            currency, utilized at various wager formats across
+                            the platform. These tokens can then be later used to
+                            purchase merchandise.
                           </p>
                         </div>
                         <div class="timeline-icon d-md-block d-none">
@@ -69,11 +68,11 @@ const Timeline = () => {
                         <div class="timeline-text">
                           <h3>WeRace Platform Launched</h3>
                           <p>
-                            The main platform where all the wager action would
-                            occur. This platform will provide the mechanisms
-                            which will allow the users to send in their
-                            predictions, along with the amount they want to
-                            wager.
+                            The central platform where all the wager action
+                            would occur. This platform will provide the
+                            mechanisms which will allow the users to send in
+                            their predictions, along with the amount they want
+                            to wager.
                           </p>
                         </div>
                       </div>
@@ -90,9 +89,9 @@ const Timeline = () => {
                         <div class="timeline-text">
                           <h3>DAO Platform Launched</h3>
                           <p>
-                            This platform will augument WeRace DAO Token holders
-                            to communicate with each other, call for a vote,
-                            take desicions and get involeved in various events.
+                            This platform will augment WeRace DAO Token holders
+                            to communicate, call for a vote, take decisions and
+                            get involved in various events.
                           </p>
                         </div>
                         <div class="timeline-icon d-md-block d-none">

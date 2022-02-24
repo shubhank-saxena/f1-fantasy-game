@@ -11,6 +11,7 @@ import Timeline from "./components/Timeline";
 import Footer from "./components/Footer";
 
 function App() {
+  
   const [currentAccount, setCurrentAccount] = useState("");
   const [network, setNetwork] = useState("");
   const [alreadyMinted, setAlreadyMinted] = useState(false);
@@ -64,21 +65,19 @@ function App() {
     setNetwork(networks[chainId]);
 
     // This is the part, where we check if the user has already minted the contract
-    try{
+    try {
       const contract = new ethers.Contract(
-      "0xbc63dc090534d9ca9e4c281e04a125856e1cbd66",
-      contractAbi.abi,
-      currentAccount
-    );
+        "0x315F97D07eE4B8563d377944EcE1b3e9B2A1E6Ce",
+        contractAbi.abi,
+        currentAccount
+      );
       await contract.checkMintBalance(currentAccount);
-      if( await contract.getRemaining() === 0){
+      if ((await contract.getRemaining()) === 0) {
         setMintOver(true);
       }
     } catch (error) {
-      setAlreadyMinted(true)
+      setAlreadyMinted(true);
     }
-
-
 
     ethereum.on("chainChanged", handleChainChanged);
 
@@ -88,6 +87,11 @@ function App() {
     }
   };
 
+    // This runs our function when the page loads.
+    useEffect(() => {
+      checkIfWalletIsConnected();
+    }, []);
+
   const mintNFT = async () => {
     try {
       const { ethereum } = window;
@@ -95,7 +99,7 @@ function App() {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const contract = new ethers.Contract(
-          "0xbc63dc090534d9ca9e4c281e04a125856e1cbd66",
+          "0xF49A3a0111a7b531eFD75ec5D2433B2e950e50A0",
           contractAbi.abi,
           signer
         );
@@ -107,8 +111,9 @@ function App() {
 
         // Check if the transaction was successfully completed
         if (receipt.status === 1) {
+          alert ("Successfully minted!");
           console.log(
-            "Domain minted! https://mumbai.polygonscan.com/tx/" + tx.hash
+            "NFT minted! https://polygonscan.com/tx/" + tx.hash
           );
         } else {
           alert("Transaction failed! Please try again");
@@ -138,7 +143,7 @@ function App() {
                 {
                   chainId: "0x13881",
                   chainName: "Polygon Mumbai Testnet",
-                  rpcUrls: ["https://rpc-mumbai.maticvigil.com/"],
+                  rpcUrls: ["https://rpc-mumbai.maticvigil.com"],
                   nativeCurrency: {
                     name: "Mumbai Matic",
                     symbol: "MATIC",
@@ -172,27 +177,22 @@ function App() {
     </button>
   );
 
+  const renderMintGuideButton = () => {
+    return (
+      <button
+        type="button"
+        className="btn btn-secondary btn-lg"
+        onClick={() =>
+          window.open("https://www.youtube.com/watch?v=JhoxiUkAMkQ", "_blank")
+        }
+      >
+        How to mint (for free!)
+      </button>
+    );
+  };
+
+
   const renderMintButton = () => {
-    if (mintOver===true){
-      return(
-        <button
-          type="button"
-          className="btn btn-primary btn-lg" disabled
-        >
-          Sold Out!
-        </button>
-      );
-    }
-    if (alreadyMinted===true) {
-      return(
-        <button
-          type="button"
-          className="btn btn-primary btn-lg" disabled
-        >
-          You have already minted!
-        </button>
-      );
-    }
     if (network !== "Polygon Mumbai Testnet") {
       return (
         <button
@@ -201,6 +201,20 @@ function App() {
           onClick={switchNetwork}
         >
           Click to Switch to Polygon Network
+        </button>
+      );
+    }
+    if (mintOver === true) {
+      return (
+        <button type="button" className="btn btn-primary btn-lg" disabled>
+          Sold Out!
+        </button>
+      );
+    }
+    if (alreadyMinted === true) {
+      return (
+        <button type="button" className="btn btn-secondary btn-lg" disabled>
+          You have already minted!
         </button>
       );
     }
@@ -224,30 +238,34 @@ function App() {
       <>
         <header id="header" className="header">
           <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
-            <a href="index.html" className="logo d-flex align-items-center">
+            <a href="" className="logo d-flex align-items-center">
               <span>WeRace</span>
             </a>
 
             <nav id="navbar" className="navbar">
               <ul>
                 <li className="d-flex">
-                  <img
-                    alt="Network logo"
-                    style={{
-                      height: "30px",
-                      width: "30px",
-                      marginRight: "10px",
-                    }}
-                    className="logo"
-                    src={network.includes("Polygon") ? polygonLogo : ethLogo}
-                  />
                   <div style={{ marginTop: "5px" }}>
                     {currentAccount ? (
-                      <p>
-                        {" "}
-                        Wallet: {currentAccount.slice(0, 6)}...
-                        {currentAccount.slice(-4)}{" "}
-                      </p>
+                      <div className="d-flex">
+                        <img
+                          alt="Network logo"
+                          style={{
+                            height: "30px",
+                            width: "30px",
+                            marginRight: "10px",
+                          }}
+                          className="logo"
+                          src={
+                            network.includes("Polygon") ? polygonLogo : ethLogo
+                          }
+                        />
+                        <p>
+                          {" "}
+                          Wallet: {currentAccount.slice(0, 6)}...
+                          {currentAccount.slice(-4)}{" "}
+                        </p>
+                      </div>
                     ) : (
                       <button type="button" className="btn btn-danger">
                         Wallet Not Connected
@@ -264,10 +282,6 @@ function App() {
     );
   };
 
-  // This runs our function when the page loads.
-  useEffect(() => {
-    checkIfWalletIsConnected();
-  }, []);
 
   return (
     <>
@@ -288,18 +302,7 @@ function App() {
                 {!currentAccount && renderNotConnectedContainer()}
                 {currentAccount && renderMintButton()}
                 &nbsp;&nbsp;&nbsp;
-                <button
-                  type="button"
-                  className="btn btn-secondary btn-lg"
-                  onClick={() =>
-                    window.open(
-                      "https://www.youtube.com/watch?v=jPfryC5yCo0",
-                      "_blank"
-                    )
-                  }
-                >
-                  How to mint (for free!)
-                </button>
+                {renderMintGuideButton()}
               </div>
             </div>
             <div className="col-lg-6">

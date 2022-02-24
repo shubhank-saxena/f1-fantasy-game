@@ -43,7 +43,7 @@ const Works = () => {
               <div className="d-flex align-items-center mb-2">
                 <h4>
                   Predict the race standings, constructors standing, fastest
-                  laps etc for every race.{" "}
+                  laps etc., for every race.{" "}
                 </h4>
               </div>
               <p>
@@ -54,9 +54,9 @@ const Works = () => {
                 <h4>The more you pool in, the higher is the reward!</h4>
               </div>
               <p>
-                You can predict upto as many drivers/constructors as you want.
+                You can predict up to as many drivers/constructors as you want.
                 The more accurate your predictions are, the higher amount of
-                tokens would be awarded.
+                tokens you would be awarded.
               </p>
             </div>
 
@@ -65,8 +65,8 @@ const Works = () => {
                 <h4>Earn race day NFTs</h4>
               </div>
               <p>
-                These are commemorative NFTs of the race and will be provided to
-                everyone who participates in the race's prediction.
+                Commemorative NFTs of the race and will be provided to everyone
+                who participates in the race's prediction.
               </p>
               <div className="d-flex align-items-center mb-2">
                 <h4>Exclusive win NFTs</h4>
@@ -74,7 +74,7 @@ const Works = () => {
               <p>
                 Every race weekend will have a leaderboard. The top performers
                 of every race weekend would be given rare NFTs. These would be
-                limited to only top 10-15 of the total leaderboard.
+                limited to only the top 10-15 of the total leaderboard.
               </p>
             </div>
 
@@ -84,7 +84,7 @@ const Works = () => {
               </div>
               <p>
                 The tokens won in prediction sessions can be utilized to
-                purchase exlusive merchandise.
+                purchase exclusive merchandise.
               </p>
             </div>
 
@@ -93,30 +93,30 @@ const Works = () => {
                 <h4>Participate in DAO</h4>
               </div>
               <p>
-                The initial NFT mint will act as DAO tokens. This will be
+                The initial NFT mint will act as DAO tokens. These NFTs will be
                 utilized to gatekeep and form WeRace DAO, which will supervise
                 the token distribution, new wager events, NFT distribution,
                 third-party contracts (for designs if needed) etc. These DAO
-                holders would also be eligible for exlusive token airdrops and
+                holders would also be eligible for exclusive token airdrops and
                 wager-on-discounts.
               </p>
             </div>
           </div>
         </div>
       </div>
-      <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </>
   );
 };
