@@ -129,7 +129,6 @@ const App = () => {
       setRemainingCount(mintCount);
       let balance = await contract.balanceOf(currentAccount, 1);
       setMinted(balance > 0 ? true : false);
-
       }} catch (error) {console.log(error)}
   };
 

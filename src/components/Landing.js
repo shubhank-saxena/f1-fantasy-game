@@ -60,7 +60,7 @@ const Landing = (props) => {
           window.open("https://www.youtube.com/watch?v=JhoxiUkAMkQ", "_blank")
         }
       >
-        How to mint
+        How to mint(for free!)
       </button>
     );
   };
@@ -98,7 +98,7 @@ const Landing = (props) => {
                     className="list-group-item"
                     style={{ textAlign: "center" }}
                   >
-                    Mints Completed: {500 - props.remainingCount} of 500
+                    Mints Remaining: {parseInt(props.remainingCount)} of 500
                   </li>
                   <li
                     className="list-group-item"
