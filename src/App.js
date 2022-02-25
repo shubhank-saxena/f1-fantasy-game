@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import contractAbi from "./utils/contractABI.json";
-// Add the domain you will be minting
-import NavHeader from './components/NavHeader';
-import Landing from './components/Landing';
 
-import { networks } from './utils/networks';
+import NavHeader from "./components/NavHeader";
+import Landing from "./components/Landing";
+import Works from "./components/Works";
+import Timeline from "./components/Timeline";
+import Footer from "./components/Footer";
 
-const CONTRACT_ADDRESS = "0x9e6A08BB0A6D1D58Fb1c80e15F92fE157C1e75fE";
+import { networks } from "./utils/networks";
+
+const CONTRACT_ADDRESS = "0x71632157F9AAC7dFE2e91184DF209e9eCB827E27";
 
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [minted, setMinted] = useState(false);
-  const [network, setNetwork] = useState('');
-  const [remainingCount, setRemainingCount] = useState(10);
+  const [network, setNetwork] = useState("");
+  const [remainingCount, setRemainingCount] = useState("");
 
   const connectWallet = async () => {
     try {
@@ -36,7 +39,7 @@ const App = () => {
   };
 
   const checkIfWalletIsConnected = async () => {
-		const { ethereum } = window;
+    const { ethereum } = window;
 
 		if (!ethereum) {
 			console.log('Make sure you have metamask!');
@@ -54,20 +57,11 @@ const App = () => {
 		} else {
 			console.log('No authorized account found');
 		}
-		
+
+    
 		// This is the new part, we check the user's network chain ID
 		const chainId = await ethereum.request({ method: 'eth_chainId' });
 		setNetwork(networks[chainId]);
-
-    //Check if the user has already minted the NFT and count of NFT
-    const contract = new ethers.Contract(CONTRACT_ADDRESS, contractAbi, ethereum.currentProvider);
-    const balanceOf = await contract.methods.balanceOf(currentAccount, 1).call()
-    if (balanceOf > 0) {
-      setMinted(true);
-    }
-    const count = await contract.getRemaining()
-    setRemainingCount(count)
-
 
 		ethereum.on('chainChanged', handleChainChanged);
 		
@@ -75,15 +69,15 @@ const App = () => {
 		function handleChainChanged(_chainId) {
 			window.location.reload();
 		}
-	};
+  };
 
   const switchNetwork = async () => {
     if (window.ethereum) {
       try {
         // Try to switch to the Mumbai testnet
         await window.ethereum.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x13881' }], // Check networks.js for hexadecimal network ids
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: "0x13881" }], // Check networks.js for hexadecimal network ids
         });
       } catch (error) {
         // This error code means that the chain we want has not been added to MetaMask
@@ -91,18 +85,18 @@ const App = () => {
         if (error.code === 4902) {
           try {
             await window.ethereum.request({
-              method: 'wallet_addEthereumChain',
+              method: "wallet_addEthereumChain",
               params: [
-                {	
-                  chainId: '0x13881',
-                  chainName: 'Polygon Mumbai Testnet',
-                  rpcUrls: ['https://rpc-mumbai.maticvigil.com/'],
+                {
+                  chainId: "0x13881",
+                  chainName: "Polygon Mumbai Testnet",
+                  rpcUrls: ["https://rpc-mumbai.maticvigil.com/"],
                   nativeCurrency: {
-                      name: "Mumbai Matic",
-                      symbol: "MATIC",
-                      decimals: 18
+                    name: "Mumbai Matic",
+                    symbol: "MATIC",
+                    decimals: 18,
                   },
-                  blockExplorerUrls: ["https://mumbai.polygonscan.com/"]
+                  blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
                 },
               ],
             });
@@ -114,12 +108,32 @@ const App = () => {
       }
     } else {
       // If window.ethereum is not found then MetaMask is not installed
-      alert('MetaMask is not installed. Please install it to use this app: https://metamask.io/download.html');
-    } 
-  }
+      alert(
+        "MetaMask is not installed. Please install it to use this app: https://metamask.io/download.html"
+      );
+    }
+  };
+
+  const readContract = async () => {
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(
+          CONTRACT_ADDRESS,
+          contractAbi.abi,
+          signer
+        );
+      let mintCount = await contract.getRemaining();
+      setRemainingCount(mintCount);
+      let balance = await contract.balanceOf(currentAccount, 1);
+      setMinted(balance > 0 ? true : false);
+
+      }} catch (error) {console.log(error)}
+  };
 
   const mintNFT = async () => {
-
     try {
       const { ethereum } = window;
       if (ethereum) {
@@ -138,7 +152,8 @@ const App = () => {
 
         // Check if the transaction was successfully completed
         if (receipt.status === 1) {
-          alert ("Successfully minted NFT");
+          alert("Successfully minted NFT. You can check it out at ");
+          setMinted(true);
           console.log(
             "Domain minted! https://mumbai.polygonscan.com/tx/" + tx.hash
           );
@@ -157,13 +172,27 @@ const App = () => {
     checkIfWalletIsConnected();
   }, []);
 
+  useEffect(() => {
+    readContract();
+  }, [currentAccount]);
+
   return (
     <div className="App">
       <div className="container">
-        <NavHeader  network={network} currentAccount={currentAccount} />
-        <Landing remainingCount={remainingCount} mintNFT={mintNFT} minted={minted} currentAccount={currentAccount} connectWallet={connectWallet} network={network} switchNetwork={switchNetwork}/>
-
+        <NavHeader network={network} currentAccount={currentAccount} />
+        <Landing
+          remainingCount={remainingCount}
+          mintNFT={mintNFT}
+          minted={minted}
+          currentAccount={currentAccount}
+          connectWallet={connectWallet}
+          network={network}
+          switchNetwork={switchNetwork}
+        />
+        <Works />
+        <Timeline />
       </div>
+      <Footer />
     </div>
   );
 };

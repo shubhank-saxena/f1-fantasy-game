@@ -2,7 +2,7 @@ import React from "react";
 
 const Works = () => {
   return (
-    <>
+    <div style={{marginBottom:"260px", marginTop:"100px"}}>
       <div className="row feture-tabs">
         <div className="col-lg-6">
           <img
@@ -104,20 +104,7 @@ const Works = () => {
           </div>
         </div>
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-    </>
+    </div>
   );
 };
 

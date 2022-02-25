@@ -10,7 +10,7 @@ const NavHeader = (props) => {
       <header id="header" className="header">
         <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
           <a href="index.html" className="logo d-flex align-items-center">
-            <span>FlexStart</span>
+            <span>WeRace</span>
           </a>
 
           <nav id="navbar" className="navbar">

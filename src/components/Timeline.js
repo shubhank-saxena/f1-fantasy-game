@@ -4,7 +4,7 @@ import "./Timeline.css";
 const Timeline = () => {
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>Timeline of Development</h1>
+      <h1 style={{ textAlign: "center", marginBottom:"0px"}}>Timeline of Development</h1>
       <br />
       <div class="timeline">
         <div class="container">

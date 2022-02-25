@@ -98,7 +98,7 @@ const Landing = (props) => {
                     className="list-group-item"
                     style={{ textAlign: "center" }}
                   >
-                    Mints Remaining: {props.countRemaining} of 500
+                    Mints Completed: {500 - props.remainingCount} of 500
                   </li>
                   <li
                     className="list-group-item"
