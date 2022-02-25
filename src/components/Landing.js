@@ -51,6 +51,17 @@ const Landing = (props) => {
     }
   };
 
+  const renderMintCount  = () => {
+    return(
+      <li
+        className="list-group-item"
+        style={{ textAlign: "center" }}
+      >
+      Mints Remaining: {parseInt(props.remainingCount)} of 500
+      </li>
+    )
+  }
+
   const renderInstructionButton = () => {
     return (
       <button
@@ -94,12 +105,7 @@ const Landing = (props) => {
               />
               <div className="card-body">
                 <ul className="list-group list-group-flush">
-                  <li
-                    className="list-group-item"
-                    style={{ textAlign: "center" }}
-                  >
-                    Mints Remaining: {parseInt(props.remainingCount)} of 500
-                  </li>
+                  {props.remainingCount!=="" && renderMintCount()}
                   <li
                     className="list-group-item"
                     style={{ textAlign: "center", marginBottom: "0px" }}
