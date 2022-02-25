@@ -1,10 +1,69 @@
 import React from "react";
-import currentAccount from '../App';
 
-const Landing = () => {
-  const renderNotConnectedContainer = () => (
-    <button className="cta-button">Connect Wallet</button>
+const Landing = (props) => {
+  const renderConnectWallet = () => (
+    <button
+      style={{ marginRight: "10px" }}
+      onClick={props.connectWallet}
+      type="button"
+      class="btn btn-warning btn-lg d-inline-flex align-items-center justify-content-center align-self-center"
+    >
+      Connect Wallet
+    </button>
   );
+
+  const renderMintButton = () => {
+    if (props.network !== "Polygon Mumbai Testnet") {
+      return (
+        <button
+          style={{ marginRight: "10px" }}
+          type="button"
+          class="btn btn-danger btn-lg"
+          onClick={props.switchNetwork}
+        >
+          Switch to Polygon
+        </button>
+      );
+    } else {
+      if (props.minted === true) {
+        return (
+          <button
+            type="button"
+            class="btn btn-secondary btn-lg"
+            disabled
+            style={{ marginRight: "10px" }}
+          >
+            Already Minted
+          </button>
+        );
+      } else {
+        return (
+          <button
+            style={{ marginRight: "10px" }}
+            type="button"
+            class="btn btn-success btn-lg"
+            onClick={props.mintNFT}
+          >
+            Mint NFT
+          </button>
+        );
+      }
+    }
+  };
+
+  const renderInstructionButton = () => {
+    return (
+      <button
+        type="button"
+        class="btn btn-info btn-lg"
+        onClick={() =>
+          window.open("https://www.youtube.com/watch?v=JhoxiUkAMkQ", "_blank")
+        }
+      >
+        How to mint
+      </button>
+    );
+  };
 
   return (
     <>
@@ -20,19 +79,9 @@ const Landing = () => {
             <h5>Mint an exclusive DAO for added benefits!</h5>
             <div>
               <div className="text-center text-lg-start">
-                <a
-                  href="#about"
-                  className="d-inline-flex align-items-center justify-content-center align-self-center"
-                >
-                  <span>{!currentAccount && renderNotConnectedContainer()}</span>
-                </a>
-                <a
-                  href="#about"
-                  className="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center"
-                >
-                  <span>How to mint?</span>
-                  <i className="bi bi-arrow-right"></i>
-                </a>
+                {!props.currentAccount && renderConnectWallet()}
+                {props.currentAccount && renderMintButton()}
+                {!props.minted && renderInstructionButton()}
               </div>
             </div>
           </div>
@@ -41,8 +90,33 @@ const Landing = () => {
               <img
                 className="card-img-top"
                 src="https://lh3.googleusercontent.com/cALyqUNCp_IJ-QqCDO1Beg8EmFLfIAxMGn9Qtugs7sfGmFZi5lxPsq-c_xl3CSO42vH6gl6LSO-iOWJ1GeCESvoNtef-6Cvm9VIdXQ=w600"
-                alt="Card image cap"
+                alt="Landing image"
               />
+              <div className="card-body">
+                <ul className="list-group list-group-flush">
+                  <li
+                    className="list-group-item"
+                    style={{ textAlign: "center" }}
+                  >
+                    Mints Remaining: {props.countRemaining} of 500
+                  </li>
+                  <li
+                    className="list-group-item"
+                    style={{ textAlign: "center", marginBottom: "0px" }}
+                  >
+                    <button
+                      type="button"
+                      class="btn btn-lg"
+                      style={{ backgroundColor: "#2BCDE4" }}
+                      onClick={() =>
+                        window.open("https://opensea.io", "_blank")
+                      }
+                    >
+                      View on OpenSea
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
