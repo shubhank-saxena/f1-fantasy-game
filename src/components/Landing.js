@@ -44,29 +44,37 @@ const Landing = (props) => {
             class="btn btn-success btn-lg"
             onClick={props.mintNFT}
           >
-            Mint NFT
+            {props.loader ? (
+              <><span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              Minting...</>
+            ) : (
+              "Mint NFT"
+            )}
           </button>
         );
       }
     }
   };
 
-  const renderMintCount  = () => {
-    return(
-      <li
-        className="list-group-item"
-        style={{ textAlign: "center" }}
-      >
-      Mints Remaining: {parseInt(props.remainingCount)} of 500
+  const renderMintCount = () => {
+    return (
+      <li className="list-group-item" style={{ textAlign: "center" }}>
+        Mints Remaining: {parseInt(props.remainingCount)} of 500
       </li>
-    )
-  }
+    );
+  };
 
   const renderInstructionButton = () => {
     return (
       <button
         type="button"
         class="btn btn-info btn-lg"
+        data-toggle="modal"
+        data-target="#exampleModalCenter"
         onClick={() =>
           window.open("https://www.youtube.com/watch?v=JhoxiUkAMkQ", "_blank")
         }
@@ -105,7 +113,7 @@ const Landing = (props) => {
               />
               <div className="card-body">
                 <ul className="list-group list-group-flush">
-                  {props.remainingCount!=="" && renderMintCount()}
+                  {props.remainingCount !== "" && renderMintCount()}
                   <li
                     className="list-group-item"
                     style={{ textAlign: "center", marginBottom: "0px" }}

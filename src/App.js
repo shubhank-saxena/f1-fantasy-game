@@ -14,9 +14,10 @@ const CONTRACT_ADDRESS = "0x71632157F9AAC7dFE2e91184DF209e9eCB827E27";
 
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
-  const [minted, setMinted] = useState(false);
+  const [minted, setMinted] = useState(false); 
   const [network, setNetwork] = useState("");
   const [remainingCount, setRemainingCount] = useState("");
+  const [loader, setLoader] = useState(false);
 
   const connectWallet = async () => {
     try {
@@ -146,8 +147,10 @@ const App = () => {
 
         console.log("Going to pop wallet now to pay gas...");
         let tx = await contract.mint();
+        setLoader(true);
         // Wait for the transaction to be mined
         const receipt = await tx.wait();
+        setLoader(false);
 
         // Check if the transaction was successfully completed
         if (receipt.status === 1) {
@@ -187,6 +190,7 @@ const App = () => {
           connectWallet={connectWallet}
           network={network}
           switchNetwork={switchNetwork}
+          loader = {loader}
         />
         <Works />
         <Timeline />
