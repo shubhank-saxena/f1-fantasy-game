@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 
 import { networks } from "./utils/networks";
 
-const CONTRACT_ADDRESS = "0x6cdD7735a96C125cC4ddf5e539cfdcd2Aa32397B";
+const CONTRACT_ADDRESS = "0x5db4EF574c8fF09567B69505FF7E096EF73a6AB9";
 
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
@@ -154,7 +154,7 @@ const App = () => {
 
         // Check if the transaction was successfully completed
         if (receipt.status === 1) {
-          alert("Successfully minted NFT. You can check it out at https://opensea.io/assets/");
+          alert("Successfully minted NFT. You can check it out at https://opensea.io/assets/matic/0x5db4ef574c8ff09567b69505ff7e096ef73a6ab9/1");
           setMinted(true);
           console.log(
             "Domain minted! https://polygonscan.com/tx/" + tx.hash

@@ -44,7 +44,7 @@ const Landing = (props) => {
               style={{ backgroundColor: "#55acee", textAlign: "center"}}
               onClick={() =>
                 window.open(
-                  "https://twitter.com/intent/tweet?text=I%20just%20minted%20my%20WeRace%20DAO%20NFT.%20You%20can%20check%20it%20out%20at%20https%3A%2F%2Fopensea.io%2F%20&hashtags=web3&hashtags=dao&hashtags=f1&hashtags=werace",
+                  "https://twitter.com/intent/tweet?text=I%20just%20minted%20my%20WeRace%20DAO%20NFT.%20You%20can%20check%20it%20out%20at%20https%3A%2F%2Fopensea.io%2Fassets%2Fmatic%2F0x5db4ef574c8ff09567b69505ff7e096ef73a6ab9%2F1%20&hashtags=web3&hashtags=dao&hashtags=f1&hashtags=werace",
                   "_blank"
                 )
               }
@@ -141,7 +141,7 @@ const Landing = (props) => {
                       class="btn btn-lg"
                       style={{ backgroundColor: "#2BCDE4" }}
                       onClick={() =>
-                        window.open("https://opensea.io", "_blank")
+                        window.open("https://opensea.io/collection/werace-nfts", "_blank")
                       }
                     >
                       View on OpenSea
