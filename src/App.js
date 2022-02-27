@@ -78,7 +78,7 @@ const App = () => {
         // Try to switch to the Mumbai testnet
         await window.ethereum.request({
           method: "wallet_switchEthereumChain",
-          params: [{ chainId: "0x89" }], // Check networks.js for hexadecimal network ids
+          params: [{ chainId: "0x13881" }], // Check networks.js for hexadecimal network ids
         });
       } catch (error) {
         // This error code means that the chain we want has not been added to MetaMask
@@ -89,15 +89,15 @@ const App = () => {
               method: "wallet_addEthereumChain",
               params: [
                 {
-                  chainId: "0x89",
-                  chainName: "Polygon Mainnet",
-                  rpcUrls: ["https://polygon-rpc.com/"],
+                  chainId: "0x13881",
+                  chainName: "Polygon Mumbai Testnet",
+                  rpcUrls: ["https://rpc-mumbai.matic.today"],
                   nativeCurrency: {
-                    name: "Matic",
+                    name: "Mumbai Matic",
                     symbol: "MATIC",
                     decimals: 18,
                   },
-                  blockExplorerUrls: ["https://polygonscan.com/"],
+                  blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
                 },
               ],
             });
