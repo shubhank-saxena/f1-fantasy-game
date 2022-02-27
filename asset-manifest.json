@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/static/css/main.1497e57e.css",
-    "main.js": "/static/js/main.3c0e9317.js",
+    "main.js": "/static/js/main.42b5b242.js",
     "static/media/ethlogo.png": "/static/media/ethlogo.a85b6de0dc4a013ae2f8.png",
     "static/media/polygonlogo.png": "/static/media/polygonlogo.6cde40a9b9119621eb2b.png",
     "index.html": "/index.html",
     "main.1497e57e.css.map": "/static/css/main.1497e57e.css.map",
-    "main.3c0e9317.js.map": "/static/js/main.3c0e9317.js.map"
+    "main.42b5b242.js.map": "/static/js/main.42b5b242.js.map"
   },
   "entrypoints": [
     "static/css/main.1497e57e.css",
-    "static/js/main.3c0e9317.js"
+    "static/js/main.42b5b242.js"
   ]
 }
