@@ -40,6 +40,8 @@ const Landing = (props) => {
             </button>
             <button
               type="button"
+              className="btn btn-primary btn-lg"
+              style={{ backgroundColor: "#55acee", textAlign: "center"}}
               onClick={() =>
                 window.open(
                   "https://twitter.com/intent/tweet?text=I%20just%20minted%20my%20WeRace%20DAO%20NFT.%20You%20can%20check%20it%20out%20at%20https%3A%2F%2Fopensea.io%2F%20&hashtags=web3&hashtags=dao&hashtags=f1&hashtags=werace",
