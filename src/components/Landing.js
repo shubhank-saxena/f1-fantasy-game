@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 const Landing = (props) => {
   const renderConnectWallet = () => (
@@ -13,7 +15,7 @@ const Landing = (props) => {
   );
 
   const renderMintButton = () => {
-    if (props.network !== "Polygon Mumbai Testnet") {
+    if (props.network !== "Polygon Mainnet") {
       return (
         <button
           style={{ marginRight: "10px" }}
@@ -27,14 +29,28 @@ const Landing = (props) => {
     } else {
       if (props.minted === true) {
         return (
-          <button
-            type="button"
-            class="btn btn-secondary btn-lg"
-            disabled
-            style={{ marginRight: "10px" }}
-          >
-            Already Minted
-          </button>
+          <>
+            <button
+              type="button"
+              class="btn btn-secondary btn-lg"
+              disabled
+              style={{ marginRight: "10px" }}
+            >
+              Already Minted
+            </button>
+            <button
+              type="button"
+              onClick={() =>
+                window.open(
+                  "https://twitter.com/intent/tweet?text=I%20just%20minted%20my%20WeRace%20DAO%20NFT.%20You%20can%20check%20it%20out%20at%20https%3A%2F%2Fopensea.io%2F%20&hashtags=web3&hashtags=dao&hashtags=f1&hashtags=werace",
+                  "_blank"
+                )
+              }
+            >
+              <FontAwesomeIcon icon={faTwitter} />
+              &nbsp;Share on Twitter
+            </button>
+          </>
         );
       } else {
         return (
@@ -45,12 +61,14 @@ const Landing = (props) => {
             onClick={props.mintNFT}
           >
             {props.loader ? (
-              <><span
-                class="spinner-border spinner-border-sm"
-                role="status"
-                aria-hidden="true"
-              ></span>
-              Minting...</>
+              <>
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Minting...
+              </>
             ) : (
               "Mint NFT"
             )}
@@ -73,8 +91,6 @@ const Landing = (props) => {
       <button
         type="button"
         class="btn btn-info btn-lg"
-        data-toggle="modal"
-        data-target="#exampleModalCenter"
         onClick={() =>
           window.open("https://www.youtube.com/watch?v=JhoxiUkAMkQ", "_blank")
         }

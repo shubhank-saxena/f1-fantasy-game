@@ -78,7 +78,7 @@ const App = () => {
         // Try to switch to the Mumbai testnet
         await window.ethereum.request({
           method: "wallet_switchEthereumChain",
-          params: [{ chainId: "0x13881" }], // Check networks.js for hexadecimal network ids
+          params: [{ chainId: "0x89" }], // Check networks.js for hexadecimal network ids
         });
       } catch (error) {
         // This error code means that the chain we want has not been added to MetaMask
@@ -89,15 +89,15 @@ const App = () => {
               method: "wallet_addEthereumChain",
               params: [
                 {
-                  chainId: "0x13881",
-                  chainName: "Polygon Mumbai Testnet",
-                  rpcUrls: ["https://rpc-mumbai.maticvigil.com/"],
+                  chainId: "0x89",
+                  chainName: "Polygon Mainnet",
+                  rpcUrls: ["https://polygon-rpc.com/"],
                   nativeCurrency: {
-                    name: "Mumbai Matic",
+                    name: "Matic",
                     symbol: "MATIC",
                     decimals: 18,
                   },
-                  blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+                  blockExplorerUrls: ["https://polygonscan.com/"],
                 },
               ],
             });
@@ -154,10 +154,10 @@ const App = () => {
 
         // Check if the transaction was successfully completed
         if (receipt.status === 1) {
-          alert("Successfully minted NFT. You can check it out at ");
+          alert("Successfully minted NFT. You can check it out at https://opensea.io/assets/");
           setMinted(true);
           console.log(
-            "Domain minted! https://mumbai.polygonscan.com/tx/" + tx.hash
+            "Domain minted! https://polygonscan.com/tx/" + tx.hash
           );
           setMinted(true);
         } else {

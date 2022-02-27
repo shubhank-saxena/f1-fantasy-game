@@ -14,7 +14,7 @@ contract WeRaceDAONFT is ERC1155, Ownable {
 
     constructor()
         ERC1155(
-            "ipfs://Qmf8cqD7M2Bk7juRLG3vSrq4mpty32wuGBpeqhxkWPCJPV"
+            "ipfs://QmZTq246LeKvPdidP2EgiXvueaHEaghwmR7Hu3z8tm1Etx"
         )
     {
         _mint(msg.sender, tokenID, 1, "");
@@ -23,7 +23,7 @@ contract WeRaceDAONFT is ERC1155, Ownable {
     }
 
     function contractURI() public view returns (string memory) {
-        return "ipfs://QmYY7FMvLcgKgnzJb61q1gvLqpxSoR2N4g2gpkoGfKszQ2";
+        return "ipfs://QmRqcJCNcywvno4jVW9tUPhw1r4mDe8qHms3ig7ZEANBoA";
     }
 
     function setURI(string memory _newuri) public onlyOwner {
