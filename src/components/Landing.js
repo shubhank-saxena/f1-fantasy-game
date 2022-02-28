@@ -83,7 +83,7 @@ const Landing = (props) => {
   const renderMintCount = () => {
     return (
       <li className="list-group-item" style={{ textAlign: "center" }}>
-        Mints Remaining: {parseInt(props.remainingCount)} of 500
+        Mints Remaining: {parseInt(props.remainingCount)} of 420
       </li>
     );
   };
